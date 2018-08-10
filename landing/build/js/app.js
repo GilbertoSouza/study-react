@@ -1,14 +1,3 @@
-$(document).ready(function(){
-    $(document).on('click', 'a[href^="#"]', function(e){
-        var id = $(this).attr('href')
-        var target = $(id)
+'use strict';
 
-        if(target.length === 0){
-            return;
-        }
-
-        e.preventDefault()
-
-        $('body, html').animate({ scrollTop: target.offset().top})
-    })
-})
+console.log('Hello!');
