@@ -1,0 +1,191 @@
+body {
+  font-family: 'Open Sans', sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif; }
+
+.navbar.navbar-default {
+  background: linear-gradient(to right, #02d4a7, #01b4a0);
+  border-color: transparent; }
+
+.navbar .navbar-brand img {
+  height: 2em; }
+
+.navbar .navbar-nav li a {
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-weight: 600;
+  color: white;
+  font-size: 1.1em; }
+  .navbar .navbar-nav li a:hover {
+    color: #fff;
+    opacity: 1;
+    transition: all 0.3s; }
+
+.header {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  background: linear-gradient(to right, #02d4a7, #01b4a0);
+  color: white;
+  padding: 11em 0;
+  height: 600px; }
+  .header h1 {
+    font-size: 4.3em; }
+  .header h2 {
+    font-weight: 300; }
+
+.btn-header-custom {
+  color: #0bb297;
+  background: #fff;
+  border: 1px solid #fff;
+  margin: 1.5em 0;
+  transition: 0.3s; }
+  .btn-header-custom:hover, .btn-header-custom:focus {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff; }
+
+.header-svg {
+  position: relative;
+  border-bottom: 1px solid #0bb297; }
+  .header-svg .sep {
+    top: -99px;
+    bottom: auto;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 7.2em; }
+    .header-svg .sep path {
+      fill: #fff; }
+  .header-svg svg:not(:root) {
+    overflow: hidden; }
+
+#about {
+  padding: 7em 0; }
+  #about h1 {
+    color: #212121;
+    font-weight: 600;
+    font-size: 5em; }
+  #about h3 {
+    color: #727272;
+    font-weight: 300;
+    font-size: 2.2 em;
+    text-transform: uppercase; }
+  #about p {
+    font-weight: 300;
+    font-size: 1.4em;
+    color: #727272;
+    padding: 1.4em 0;
+    text-align: justify; }
+  #about a {
+    background: #04c89f;
+    border-color: #04c89f;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 12%;
+    color: #fff; }
+  #about img {
+    padding: 9.5em 0; }
+
+#features {
+  padding: 7.5em 0; }
+  #features h2 {
+    color: #212121;
+    font-weight: 600;
+    font-size: 5em; }
+  #features ul {
+    list-style: none;
+    padding: 0; }
+    #features ul li {
+      font-size: 1.5em;
+      color: #727272;
+      font-weight: 300;
+      margin-bottom: 1em; }
+      #features ul li i {
+        color: #25e2bb; }
+  #features img {
+    padding: 7em 0; }
+
+#features-info .info-1 {
+  background: linear-gradient(to left, #02d4a7, #01b4a0);
+  text-align: center;
+  padding: 5em 0; }
+  #features-info .info-1 h3 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 3.5em; }
+  #features-info .info-1 p {
+    color: #fff;
+    font-weight: 300;
+    font-size: 1.3em; }
+
+#features-info .info-2 {
+  background: #ededed;
+  text-align: center;
+  padding: 5em 0; }
+  #features-info .info-2 h3 {
+    color: #212121;
+    font-weight: 600;
+    font-size: 3.4em; }
+  #features-info .info-2 p {
+    color: #212121;
+    font-weight: 300;
+    font-size: 1.3em; }
+
+#contact {
+  padding: 7.5em 0; }
+  #contact h2 {
+    font-size: 5em;
+    font-weight: 600;
+    color: #212121; }
+  #contact h3 {
+    font-weight: 300;
+    font-size: 2.5em;
+    color: #727272;
+    padding: 1.2em 0; }
+  #contact .form-control {
+    border-radius: 0;
+    border: 1px solid #727272;
+    padding: 1.5em; }
+  #contact button {
+    background: #04c89f;
+    border-color: #04c89f; }
+
+.separator {
+  background: #04c89f;
+  height: 8em;
+  width: 100%; }
+
+.footer {
+  background: #ededed; }
+  .footer img {
+    padding: 5em 0;
+    height: 15.5em; }
+  .footer .footer-nav {
+    list-style: none;
+    margin: 0em auto 3em auto; }
+    .footer .footer-nav li {
+      display: inline-block;
+      margin-right: 1.2em;
+      color: #737373;
+      font-weight: 600;
+      font-size: 1.1em; }
+      .footer .footer-nav li a {
+        color: #737373;
+        font-weight: 600;
+        font-size: 1.1em; }
+  .footer .social a {
+    margin-right: 0.6em;
+    font-size: 2.7em;
+    color: #04c89f; }
+    .footer .social a:first-child {
+      margin-left: 1em; }
+    .footer .social a:hover {
+      text-decoration: none; }
+
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto; }
