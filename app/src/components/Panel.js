@@ -20,6 +20,7 @@ class Panel extends Component {
     }
 
     render(){
+        const { cards } = this.props
         return (
             <div className="col-md-3">
                 <div className="panel panel-default">
@@ -27,7 +28,11 @@ class Panel extends Component {
                         <h2>My Panel</h2>
                     </div>
                     <div className="panel-body">
-                        <Cards />
+                        <Cards 
+                            cards = { cards }
+                            clickToEdit={ this.props.editCard }
+                            editCard={ this.props.editCard }
+                        />
                     </div>
                     <div className="panel-footer">
                         <button className="btn btn-primary" onClick={ this.handleCreateCard }>
@@ -48,7 +53,19 @@ const mapStateToPropos = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createCard: () => dispatch(CardActions.createCard())
+        createCard: () => dispatch(CardActions.createCard()),
+        editCard: (id, value) => {
+            const edited = { id }
+
+            if(!value){
+                edited.edit = true
+            }else {
+                edited.edit = false
+                edited.text = value
+            }
+
+            dispatch(CardActions.editCard(edited))
+        }
     }
 }
 
