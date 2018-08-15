@@ -32,6 +32,7 @@ class Panel extends Component {
                             cards = { cards }
                             clickToEdit={ this.props.editCard }
                             editCard={ this.props.editCard }
+                            deleteCard = { this.props.deleteCard }
                         />
                     </div>
                     <div className="panel-footer">
@@ -65,7 +66,9 @@ const mapDispatchToProps = (dispatch) => {
             }
 
             dispatch(CardActions.editCard(edited))
-        }
+        },
+
+        deleteCard: (id) => dispatch(CardActions.deleteCard(id))
     }
 }
 

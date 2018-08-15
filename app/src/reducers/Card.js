@@ -14,6 +14,11 @@ export default function cards(state = [], action) {
                 if ( id === card.id ) return Object.assign({}, card, action.payload)
                 return card
             })
+        break;
+        case ActionTypes.DELETE_CARD:
+            const { id } = action.payload
+            return state.filter(card => id !== card.id)
+        break;
         default:
             return state
     }
