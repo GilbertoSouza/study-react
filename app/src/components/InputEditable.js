@@ -5,8 +5,8 @@ class InputEditable extends Component {
         super(props)
 
         this.handleClickToEdit = this.handleClickToEdit.bind(this)
-        this.handleEditCard = this.handleEditCard.bind(this)
-        this.handleDeleteCard = this.handleDeleteCard.bind(this)
+        this.handleEdit = this.handleEdit.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
     }
 
     handleClickToEdit() {
@@ -14,7 +14,7 @@ class InputEditable extends Component {
         this.props.clickToEdit(id)
     }
 
-    handleEditCard(e) {
+    handleEdit(e) {
         if(e.type === 'keypress' && e.key !== 'Enter'){
             return
         }
@@ -23,32 +23,32 @@ class InputEditable extends Component {
         const { id } = this.props
         
         if(text.trim().length) {
-            this.props.editCard(id, text)
+            this.props.editComponent(id, text)
         }
     }
 
-    handleDeleteCard() {
+    handleDelete() {
         const { id } = this.props
-        this.props.deleteCard(id)
+        this.props.deleteComponent(id)
     }
 
     renderEditable() {
         return (            
             <div className="col-xs-10">
-                <input type="text" className="form-control" defaultValue={ this.props.text} onBlur={ this.handleEditCard } onKeyPress={ this.handleEditCard } />
+                <input type="text" className="form-control" defaultValue={ this.props.text} onBlur={ this.handleEdit } onKeyPress={ this.handleEdit } />
             </div>            
         )
     }
 
     renderText() {
         return (
-            <div>
-                <div className="col-xs-10">
+            <div className="row">
+                <div className="col-xs-10 no-padding">
                     <input type="text" className="form-control" defaultValue={ this.props.text} onClick={ this.handleClickToEdit } readOnly />
                 </div>
-                <div className="col-xs-2" onClick={ this.handleDeleteCard }>
+                <button className="btn btn-danger btn-delete col-xs-2" onClick={ this.handleDelete }>
                     <i className="ion-trash-b"></i>
-                </div>
+                </button>
             </div>
         )
     }
