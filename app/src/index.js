@@ -19,7 +19,7 @@ const db = Localforage.createInstance({
 
 db  
     .getItem('kanban')
-    .then(value => value)
+    .then(value => value || undefined)
     .then(value => cfg.configStore(value))
     .then((store) => {
         ReactDOM.render(
@@ -38,8 +38,7 @@ db
                                 </a>
                             </div>
                             <div className="navbar-collapse collapse" id="navbar">
-                                <ul className="nav navbar-nav">
-        
+                                <ul className="nav navbar-nav">        
                                 </ul>
                             </div>
                         </div>
