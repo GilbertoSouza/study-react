@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Cards from './Cards'
 import { connect } from 'react-redux'
-import CardActions from './../actions/CardActions'
-import InputEditable from './InputEditable';
 import { DragSource, DropTarget } from 'react-dnd'
+
+import InputEditable from './InputEditable';
+import CardActions from './../actions/CardActions'
+import PanelActions from './../actions/PanelActions'
 import * as Types from './../constants/Types'
 
 class Panel extends Component {
@@ -18,14 +20,33 @@ class Panel extends Component {
         super(props)
 
         this.handleCreateCard = this.handleCreateCard.bind(this)
+        this.handledeleteCard = this.handledeleteCard.bind(this)
+        this.handleDeletePanel = this.handleDeletePanel.bind(this)
     }
 
     handleCreateCard() {
-        this.props.createCard()
+        const { id } = this.props.panel
+        this.props.createCard(id)
+    }
+
+    handledeleteCard(cardId) {
+        const panelId = this.props.panel.id
+        this.props.deleteCard(panelId, cardId)
+    }
+
+    handleDeletePanel(panelId) {
+        const { cards } = this.props.panel
+        this.props.deletePanel(panelId)
+
+        cards.forEach(card => this.props.deleteCard(panelId, card))
     }
 
     render(){
         const { cards, panel, connectDragPreview, connectDropTarget, connectDragSource } = this.props
+        const filteredCards = panel.cards 
+                                .map(id => cards
+                                            .find(card => card.id === id ))
+                                .filter(card => card)
         return connectDragPreview (
             connectDropTarget (
                 <div className="col-md-3">
@@ -38,15 +59,16 @@ class Panel extends Component {
                                     text = { panel.text }
                                     editComponent = { this.props.editPanel }
                                     clickToEdit = { this.props.editPanel }
-                                    deleteComponent={ this.props.deletePanel }
+                                    deleteComponent={ this.handleDeletePanel }
                                 />
                             </div>
                             <div className="panel-body">
                                 <Cards 
-                                    cards = { cards }
+                                    cards = { filteredCards }
                                     clickToEdit={ this.props.editCard }
                                     editCard={ this.props.editCard }
-                                    deleteCard = { this.props.deleteCard }
+                                    deleteCard = { this.handledeleteCard }
+                                    moveCard = { this.props.moveCard }
                                 />
                             </div>
                             <div className="panel-footer">
@@ -70,7 +92,12 @@ const mapStateToPropos = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createCard: () => dispatch(CardActions.createCard()),
+        createCard: (panelId) => {
+            const createNewCard = CardActions.createCard('New Task')
+            dispatch(createNewCard)
+            const { id } = createNewCard.payload
+            dispatch(PanelActions.insertInPanel(panelId, id))
+        },
         editCard: (id, value) => {
             const edited = { id }
 
@@ -84,7 +111,17 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(CardActions.editCard(edited))
         },
 
-        deleteCard: (id) => dispatch(CardActions.deleteCard(id))
+        deleteCard: (panelId, cardId) => {
+            dispatch(CardActions.deleteCard(cardId))
+
+            if(!panelId){
+                return
+            }
+
+            return dispatch(PanelActions.removeFromPanel(panelId, cardId))
+        },
+        moveCard: (id, monitorId) => dispatch(PanelActions.moveCard(id, monitorId)),
+        insertInPanel: (id, monitorId) => dispatch(PanelActions.insertInPanel(id, monitorId))
     }
 }
 
@@ -107,19 +144,23 @@ const collectTarget = (connect, monitor) => ({
 
 const panelHoverTarget = {
     hover(props, monitor) {
-        const { id } = props.panel
+        const { id, cards } = props.panel
         const monitorProps = monitor.getItem()
         const monitorType = monitor.getItemType()
         const monitorId = monitorProps.id
 
-        if(id !== monitorId){
+        if(id !== monitorId && Types.PANEL === monitorType){
             return props.movePanel(id, monitorId)
+        }
+
+        if(!cards.length && Types.CARD === monitorType){
+            return props.insertInPanel(id, monitorId)
         }
     }
 }
 
 export default connect(mapStateToPropos, mapDispatchToProps)(
     DragSource(Types.PANEL, dragNDropSrc, collect)(
-        DropTarget(Types.PANEL, panelHoverTarget, collectTarget)(Panel)
+        DropTarget([Types.CARD, Types.PANEL], panelHoverTarget, collectTarget)(Panel)
     )
 )

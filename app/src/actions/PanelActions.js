@@ -33,9 +33,33 @@ const move = (id, monitorId) => {
     }
 }
 
+const moveCard = (id, monitorId) => {
+    return {
+        type: ActionTypes.MOVE_CARD,
+        payload: { id, monitorId }
+    }
+}
+
+const insertInPanel = (panelId, cardId) => {
+    return {
+        type: ActionTypes.INSERT_IN_PANEL,
+        payload: { panelId, cardId }
+    }
+}
+
+const removeFromPanel = (panelId, cardId) => {
+    return {
+        type: ActionTypes.REMOVE_FROM_PANEL,
+        payload: { panelId, cardId }
+    }
+}
+
 export default {
     createPanel,
     editPanel,
     deletePanel,
-    move
+    move,
+    moveCard,
+    insertInPanel,
+    removeFromPanel
 }
